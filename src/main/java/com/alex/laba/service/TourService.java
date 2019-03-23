@@ -6,11 +6,10 @@ import com.alex.laba.data.Tour;
 import java.util.List;
 
 public class TourService {
-    private TourDAO dao = TourDAO.getInstance();
-    private static final TourService instance = new TourService();
+    private TourDAO dao;
 
-    public static TourService getInstance() {
-        return instance;
+    public TourService(TourDAO dao) {
+        this.dao = dao;
     }
 
     public void createTour(String description, String name, Long agencyId, Long cost) {

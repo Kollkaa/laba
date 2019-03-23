@@ -1,7 +1,6 @@
 package com.alex.laba.dao;
 
 import com.alex.laba.config.DBConfig;
-import com.alex.laba.data.Agency;
 import com.alex.laba.data.Agent;
 
 import java.sql.Connection;
@@ -15,15 +14,11 @@ import java.util.Optional;
 public class AgentDAO implements DAO<Agent, Long> {
 
     private Connection connection;
-    private static AgentDAO instance = new AgentDAO();
 
-    private AgentDAO() {
+    public AgentDAO() {
         connection = DBConfig.getInstance().getConnection();
     }
 
-    public static AgentDAO getInstance() {
-        return instance;
-    }
 
     @Override
     public Agent save(Agent agent) {

@@ -13,15 +13,12 @@ import java.util.Optional;
 
 public class AgencyDAO implements DAO<Agency, Long> {
     private Connection connection;
-    private static AgencyDAO instance = new AgencyDAO();
 
-    private AgencyDAO() {
+    public AgencyDAO() {
         this.connection = DBConfig.getInstance().getConnection();
     }
 
-    public static AgencyDAO getInstance() {
-        return instance;
-    }
+
 
     @Override
     public Agency save(Agency agency) {

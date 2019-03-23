@@ -15,15 +15,11 @@ import java.util.Optional;
 public class OrderDAO implements DAO<Order, Long> {
 
     private Connection connection;
-    private static OrderDAO instance = new OrderDAO();
 
-    private OrderDAO() {
+    public OrderDAO() {
         this.connection = DBConfig.getInstance().getConnection();
     }
 
-    public static OrderDAO getInstance() {
-        return instance;
-    }
 
     @Override
     public Order save(Order order) {

@@ -1,7 +1,6 @@
 package com.alex.laba.dao;
 
 import com.alex.laba.config.DBConfig;
-import com.alex.laba.data.Tour;
 import com.alex.laba.data.User;
 
 import java.sql.Connection;
@@ -15,15 +14,11 @@ import java.util.Optional;
 public class UserDAO implements DAO<User, Long> {
 
     private Connection connection;
-    private static UserDAO instance = new UserDAO();
 
     public UserDAO() {
         this.connection = DBConfig.getInstance().getConnection();
     }
 
-    public static UserDAO getInstance() {
-        return instance;
-    }
 
     @Override
     public User save(User user) {

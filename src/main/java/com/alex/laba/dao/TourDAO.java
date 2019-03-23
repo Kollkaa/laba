@@ -13,15 +13,11 @@ import java.util.Optional;
 
 public class TourDAO implements DAO<Tour, Long> {
     private Connection connection;
-    private static TourDAO instance = new TourDAO();
 
-    private TourDAO() {
+    public TourDAO() {
         this.connection = DBConfig.getInstance().getConnection();
     }
 
-    public static TourDAO getInstance() {
-        return instance;
-    }
 
     @Override
     public Tour save(Tour tour) {

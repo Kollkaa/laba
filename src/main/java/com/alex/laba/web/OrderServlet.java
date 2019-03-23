@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.dao.OrderDAO;
 import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.OrderService;
 
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OrderServlet extends HttpServlet {
-    private OrderService service = OrderService.getInstance();
+    private OrderDAO dao = new OrderDAO();
+    private OrderService service = new OrderService(dao);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

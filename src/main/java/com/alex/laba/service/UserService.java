@@ -6,11 +6,10 @@ import com.alex.laba.data.User;
 import java.util.List;
 
 public class UserService {
-    private UserDAO dao = UserDAO.getInstance();
-    private static final UserService instance = new UserService();
+    private UserDAO dao;
 
-    public static UserService getInstance() {
-        return instance;
+    public UserService(UserDAO dao) {
+        this.dao = dao;
     }
 
     public void createUser(String name) {
