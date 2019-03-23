@@ -1,4 +1,4 @@
-<%--
+<%@ page import="static javax.servlet.RequestDispatcher.ERROR_MESSAGE" %><%--
   Created by IntelliJ IDEA.
   User: andrii
   Date: 2/26/19
@@ -30,7 +30,7 @@
 </head>
 <body>
 <div style="color: red">
-    <p>Validation falied with field: <%=request.getAttribute("field")%>
+    <p> <%=request.getAttribute(ERROR_MESSAGE)%>
     </p>
 </div>
 </body>

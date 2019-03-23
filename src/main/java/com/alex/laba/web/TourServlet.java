@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.TourService;
 
 import javax.servlet.ServletException;
@@ -26,17 +27,13 @@ public class TourServlet extends HttpServlet {
 
 
         if (!ValidationUtils.validateString(name)) {
-            req.setAttribute("field", "User Name");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Tour name is not valid");
         } else if (!ValidationUtils.validateString(description)) {
-            req.setAttribute("field", "Description");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Tour description is not valid");
         } else if (!ValidationUtils.validateInt(sAgency)) {
-            req.setAttribute("field", "Agency");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Agency name is not valid");
         } else if (!ValidationUtils.validateInt(sCost)) {
-            req.setAttribute("field", "Cost");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Cost is not valid");
         } else {
             Long agency = Long.parseLong(sAgency);
             Long cost = Long.parseLong(sCost);

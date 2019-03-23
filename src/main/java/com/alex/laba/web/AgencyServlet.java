@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.AgencyService;
 
 import javax.servlet.ServletException;
@@ -22,8 +23,7 @@ public class AgencyServlet extends HttpServlet {
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("agency_name");
         if (!ValidationUtils.validateString(name)) {
-            req.setAttribute("field", "Agency name");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Agency name is not valid");
 
         } else {
             service.createAgency(name);

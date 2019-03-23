@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.AgentService;
 
 import javax.servlet.ServletException;
@@ -23,13 +24,10 @@ public class AgentServlet extends HttpServlet {
         String sAgencyId = req.getParameter("agency_id");
 
         if (!ValidationUtils.validateInt(sAgencyId)) {
-            req.setAttribute("field", "Agency");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Agency id is not valid");
 
         } else if (!ValidationUtils.validateString(agentName)) {
-            req.setAttribute("field", "Agent name");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
-
+            throw new ValidationException("Agent name is not valid");
         } else {
             Long agencyId = Long.parseLong(sAgencyId);
             service.createAgent(agentName, agencyId);

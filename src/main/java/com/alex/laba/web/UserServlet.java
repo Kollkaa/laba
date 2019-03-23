@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.UserService;
 
 import javax.servlet.ServletException;
@@ -21,8 +22,7 @@ public class UserServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("user_name");
         if (!ValidationUtils.validateString(userName)) {
-            req.setAttribute("field", "User Name");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("User name is not valid");
         } else {
             service.createUser(userName);
             req.setAttribute("users", service.findUsers());

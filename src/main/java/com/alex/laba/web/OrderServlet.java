@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.OrderService;
 
 import javax.servlet.ServletException;
@@ -26,18 +27,13 @@ public class OrderServlet extends HttpServlet {
         String sCost = req.getParameter("cost");
 
         if (!ValidationUtils.validateInt(sUserId)) {
-            req.setAttribute("field", "User id");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
-
+            throw new ValidationException("User id is not valid");
         } else if (!ValidationUtils.validateInt(sAgentId)) {
-            req.setAttribute("field", "Agency Id");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Agency id is not valid");
         } else if (!ValidationUtils.validateInt(sTourId)) {
-            req.setAttribute("field", "Tour id");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Tour id is not valid");
         } else if (!ValidationUtils.validateInt(sCost)) {
-            req.setAttribute("field", "Cost");
-            req.getRequestDispatcher("error.jsp").forward(req, resp);
+            throw new ValidationException("Cost id is not valid");
         } else {
             Long userId = Long.parseLong(sUserId);
             Long agentId = Long.parseLong(sAgentId);
