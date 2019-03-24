@@ -17,4 +17,11 @@ public class ValidationUtils {
                 .filter(x -> x.chars().allMatch(Character::isDigit))
                 .isPresent();
     }
+
+    public static boolean validateStringLegal(String value) {
+        return Optional.ofNullable(value)
+                .filter(x -> !x.isEmpty())
+                .filter(x -> x.chars().allMatch(Character::isDigit))
+                .isPresent();
+    }
 }

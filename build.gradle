@@ -33,7 +33,7 @@ dependencies {
 liquibase {
     activities {
         main {
-            changeLogFile "/Users/andrii/IdeaProjects/laba/src/main/resources/db/changelog.xml"
+            changeLogFile "/Users/ANDaleksei/Desktop/_3rd_course/OOP/laba-alex/src/main/resources/db/changelog.xml"
             url 'jdbc:mysql://localhost/mydb'
             driver 'com.mysql.jdbc.Driver'
             username 'laba_user'
