@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.dao.AgentDAO;
 import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.AgentService;
 
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AgentServlet extends HttpServlet {
-    private AgentService service = AgentService.getInstance();
+    private AgentDAO dao = new AgentDAO();
+    private AgentService service = new AgentService(dao);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

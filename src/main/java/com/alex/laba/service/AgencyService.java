@@ -7,14 +7,9 @@ import java.util.List;
 
 public class AgencyService {
     private AgencyDAO dao;
-    private static final AgencyService instance = new AgencyService();
 
-    private AgencyService() {
-        this.dao = AgencyDAO.getInstance();
-    }
-
-    public static AgencyService getInstance() {
-        return instance;
+    public AgencyService(AgencyDAO dao) {
+        this.dao = dao;
     }
 
     public Agency createAgency(String name) {

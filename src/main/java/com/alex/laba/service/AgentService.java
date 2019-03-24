@@ -7,15 +7,9 @@ import java.util.List;
 
 public class AgentService {
     private final AgentDAO agentDAO;
-    private static final AgentService instance = new AgentService();
 
-    private AgentService() {
-        this.agentDAO = AgentDAO.getInstance();
-    }
-
-
-    public static AgentService getInstance() {
-        return instance;
+    public AgentService(AgentDAO agentDAO) {
+        this.agentDAO = agentDAO;
     }
 
     public Agent createAgent(String name, Long agencyId) {

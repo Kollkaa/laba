@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.dao.TourDAO;
 import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.TourService;
 
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class TourServlet extends HttpServlet {
-    private TourService service = TourService.getInstance();
+    private TourDAO dao = new TourDAO();
+    private TourService service = new TourService(dao);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -7,11 +7,10 @@ import java.util.List;
 
 
 public class OrderService {
-    private final OrderDAO dao = OrderDAO.getInstance();
-    private final static OrderService instance = new OrderService();
+    private final OrderDAO dao;
 
-    public static OrderService getInstance() {
-        return instance;
+    public OrderService(OrderDAO dao) {
+        this.dao = dao;
     }
 
     public void createOrder(Long userId, Long agentId, Long tourId, Long cost) {

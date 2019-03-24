@@ -1,5 +1,6 @@
 package com.alex.laba.web;
 
+import com.alex.laba.dao.UserDAO;
 import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.UserService;
 
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UserServlet extends HttpServlet {
-    private UserService service = UserService.getInstance();
+    private UserDAO dao = new UserDAO();
+    private UserService service = new UserService(dao);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
