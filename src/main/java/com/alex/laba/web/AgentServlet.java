@@ -1,6 +1,6 @@
 package com.alex.laba.web;
 
-import com.alex.laba.dao.AgentDAO;
+import com.alex.laba.config.BeanFactory;
 import com.alex.laba.exception.ValidationException;
 import com.alex.laba.service.AgentService;
 
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class AgentServlet extends HttpServlet {
-    private AgentDAO dao = new AgentDAO();
-    private AgentService service = new AgentService(dao);
+    private AgentService service = (AgentService) BeanFactory.getBean(AgentService.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
