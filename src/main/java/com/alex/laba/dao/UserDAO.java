@@ -1,6 +1,6 @@
 package com.alex.laba.dao;
 
-import com.alex.laba.config.DBConfig;
+import com.alex.laba.config.DBConnectionPool;
 import com.alex.laba.data.User;
 
 import java.sql.Connection;
@@ -13,15 +13,22 @@ import java.util.Optional;
 
 public class UserDAO implements DAO<User, Long> {
 
-    private Connection connection;
+    private DBConnectionPool connectionPool;
 
     public UserDAO() {
-        this.connection = DBConfig.getInstance().getConnection();
+        try {
+            this.connectionPool = DBConnectionPool.getInstance();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public User save(User user) {
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format("insert into %s (%s) value (?)", User.DB_NAME, User.Columns.USER_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -32,6 +39,8 @@ public class UserDAO implements DAO<User, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
@@ -43,6 +52,7 @@ public class UserDAO implements DAO<User, Long> {
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format(DAOUtils.FIND_ALL_QUERY, User.DB_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -55,6 +65,8 @@ public class UserDAO implements DAO<User, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
