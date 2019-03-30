@@ -10,6 +10,7 @@
     <include file="scripts/tour.sql" relativeToChangelogFile="true"/>
     <include file="scripts/tour-orders.sql" relativeToChangelogFile="true"/>
     <include file="scripts/agent_order.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/user_order.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/user_password.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/unique_username.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

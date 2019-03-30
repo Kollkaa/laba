@@ -15,8 +15,14 @@ public class OrderDAO implements DAO<Order, Long> {
 
     private DBConnectionPool connectionPool;
 
-    public OrderDAO() throws SQLException, ClassNotFoundException {
-        this.connectionPool = DBConnectionPool.getInstance();
+    public OrderDAO() {
+        try {
+            this.connectionPool = DBConnectionPool.getInstance();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 

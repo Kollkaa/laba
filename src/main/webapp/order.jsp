@@ -45,7 +45,7 @@
 <div class="pure-u-2-5">
     <form class="pure-form pure-form-stacked pure-u-2-5" action="<c:url value="/order"/>" method="POST">
         User id <label>
-        <input type="text" name="user_id">
+        <input type="text" name="user_id" value="${cookie.get("userid").value}" readonly>
     </label>
         Agent id <label>
         <input type="text" name="agent_id">

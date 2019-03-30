@@ -1,36 +1,33 @@
 package com.alex.laba.web;
 
 import com.alex.laba.config.BeanFactory;
-import com.alex.laba.exception.ValidationException;
+import com.alex.laba.data.User;
 import com.alex.laba.service.UserService;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class UserServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private UserService service = (UserService) BeanFactory.getBean(UserService.class);
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("users", service.findUsers());
-        req.getRequestDispatcher("user.jsp").forward(req, resp);
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("user_name");
-        if (!ValidationUtils.validateString(userName)) {
-            throw new ValidationException("User name is not valid");
-        } else {
-            service.createUser(userName, null);
-            req.setAttribute("users", service.findUsers());
-            req.getRequestDispatcher("user.jsp").forward(req, resp);
-        }
+        String name = req.getParameter("name");
+        String password = req.getParameter("password");
+        User user = service.loginOrRegister(name, password);
+        Cookie nameCookie = new Cookie("username", user.getUserName());
+        Cookie idCookie = new Cookie("userid", String.valueOf(user.getId()));
+        resp.addCookie(nameCookie);
+        resp.addCookie(idCookie);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
-
-
 }
