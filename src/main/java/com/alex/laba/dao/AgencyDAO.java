@@ -1,6 +1,6 @@
 package com.alex.laba.dao;
 
-import com.alex.laba.config.DBConfig;
+import com.alex.laba.config.DBConnectionPool;
 import com.alex.laba.data.Agency;
 
 import java.sql.Connection;
@@ -12,16 +12,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class AgencyDAO implements DAO<Agency, Long> {
-    private Connection connection;
+    private DBConnectionPool connectionPool;
 
     public AgencyDAO() {
-        this.connection = DBConfig.getInstance().getConnection();
+        try {
+            this.connectionPool = DBConnectionPool.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
-
 
 
     @Override
     public Agency save(Agency agency) {
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format("insert into %s (%s)value (?)", Agency.DB_NAME, Agency.Columns.NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -33,6 +37,8 @@ public class AgencyDAO implements DAO<Agency, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
@@ -49,6 +55,7 @@ public class AgencyDAO implements DAO<Agency, Long> {
 
     @Override
     public Optional<Agency> findById(Long aLong) {
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format(DAOUtils.FIND_BY_ID_QUERY, Agency.DB_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -61,12 +68,15 @@ public class AgencyDAO implements DAO<Agency, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
     @Override
     public List<Agency> findAll() {
         List<Agency> agencies = new ArrayList<>();
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format(DAOUtils.FIND_ALL_QUERY, Agency.DB_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -81,6 +91,8 @@ public class AgencyDAO implements DAO<Agency, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 }

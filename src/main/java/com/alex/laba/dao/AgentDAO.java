@@ -1,6 +1,6 @@
 package com.alex.laba.dao;
 
-import com.alex.laba.config.DBConfig;
+import com.alex.laba.config.DBConnectionPool;
 import com.alex.laba.data.Agent;
 
 import java.sql.Connection;
@@ -13,15 +13,20 @@ import java.util.Optional;
 
 public class AgentDAO implements DAO<Agent, Long> {
 
-    private Connection connection;
+    private DBConnectionPool connectionPool;
 
     public AgentDAO() {
-        connection = DBConfig.getInstance().getConnection();
+        try {
+            connectionPool = DBConnectionPool.getInstance();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public Agent save(Agent agent) {
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format("insert into %s (%s, %s) value (?, ?)", Agent.DB_NAME, Agent.Columns.NAME, Agent.Columns.AGENCY_ID);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -33,6 +38,8 @@ public class AgentDAO implements DAO<Agent, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
@@ -44,6 +51,7 @@ public class AgentDAO implements DAO<Agent, Long> {
     @Override
     public List<Agent> findAll() {
         List<Agent> agents = new ArrayList<>();
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format(DAOUtils.FIND_ALL_QUERY, Agent.DB_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -56,6 +64,8 @@ public class AgentDAO implements DAO<Agent, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 

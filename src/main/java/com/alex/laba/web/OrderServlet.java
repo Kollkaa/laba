@@ -1,7 +1,9 @@
 package com.alex.laba.web;
 
+import com.alex.laba.config.BeanFactory;
 import com.alex.laba.dao.OrderDAO;
 import com.alex.laba.exception.ValidationException;
+import com.alex.laba.service.AgencyService;
 import com.alex.laba.service.OrderService;
 
 import javax.servlet.ServletException;
@@ -11,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class OrderServlet extends HttpServlet {
-    private OrderDAO dao = new OrderDAO();
-    private OrderService service = new OrderService(dao);
+    private OrderService service = (OrderService) BeanFactory.getBean(OrderService.class);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,7 +1,9 @@
 package com.alex.laba.web;
 
+import com.alex.laba.config.BeanFactory;
 import com.alex.laba.dao.TourDAO;
 import com.alex.laba.exception.ValidationException;
+import com.alex.laba.service.AgencyService;
 import com.alex.laba.service.TourService;
 
 import javax.servlet.ServletException;
@@ -11,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class TourServlet extends HttpServlet {
-    private TourDAO dao = new TourDAO();
-    private TourService service = new TourService(dao);
+    private TourService service = (TourService) BeanFactory.getBean(TourService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

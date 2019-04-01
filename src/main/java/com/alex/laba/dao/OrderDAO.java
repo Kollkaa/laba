@@ -1,7 +1,6 @@
 package com.alex.laba.dao;
 
-import com.alex.laba.config.DBConfig;
-import com.alex.laba.data.Agent;
+import com.alex.laba.config.DBConnectionPool;
 import com.alex.laba.data.Order;
 
 import java.sql.Connection;
@@ -14,15 +13,22 @@ import java.util.Optional;
 
 public class OrderDAO implements DAO<Order, Long> {
 
-    private Connection connection;
+    private DBConnectionPool connectionPool;
 
     public OrderDAO() {
-        this.connection = DBConfig.getInstance().getConnection();
+        try {
+            this.connectionPool = DBConnectionPool.getInstance();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public Order save(Order order) {
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format("insert into %s (%s, %s, %s, %s) value (?, ?, ?, ?)", Order.DB_NAME, Order.Columns.USER_ID, Order.Columns.TOUR_ID, Order.Columns.AGENT_ID, Order.Columns.COST);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -36,6 +42,8 @@ public class OrderDAO implements DAO<Order, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
@@ -47,6 +55,7 @@ public class OrderDAO implements DAO<Order, Long> {
     @Override
     public List<Order> findAll() {
         List<Order> orders = new ArrayList<>();
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format(DAOUtils.FIND_ALL_QUERY, Order.DB_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -59,6 +68,8 @@ public class OrderDAO implements DAO<Order, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 

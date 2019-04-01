@@ -34,9 +34,9 @@
         <li class="pure-menu-item"><a href="/agency">Agencies</a></li>
         <li class="pure-menu-item"><a href="/agent">Agents</a></li>
         <li class="pure-menu-item"><a href="/order">Orders</a></li>
-        <li class="pure-menu-item"><a href="/user">Users</a></li>
         <li class="pure-menu-item"><a href="/tour">Tours</a></li>
     </ul>
 </div>
+<h2>Welcome ${cookie.get("username").value}</h2>
 </body>
 </html>

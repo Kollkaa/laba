@@ -14,8 +14,8 @@ public class UserServiceTest {
     private UserService service = new UserService(dao);
 
     @Test
-    public void agencyCanBeSaved() {
-        service.createUser("Test");
+    public void userCanBeSaved() {
+        service.createUser("Test", "PAssw");
         verify(dao).save(any());
     }
 }

@@ -1,6 +1,6 @@
 package com.alex.laba.dao;
 
-import com.alex.laba.config.DBConfig;
+import com.alex.laba.config.DBConnectionPool;
 import com.alex.laba.data.Tour;
 
 import java.sql.Connection;
@@ -12,15 +12,22 @@ import java.util.List;
 import java.util.Optional;
 
 public class TourDAO implements DAO<Tour, Long> {
-    private Connection connection;
+    private DBConnectionPool connectionPool;
 
     public TourDAO() {
-        this.connection = DBConfig.getInstance().getConnection();
+        try {
+            this.connectionPool = DBConnectionPool.getInstance();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
     @Override
     public Tour save(Tour tour) {
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format("insert into %s (%s, %s, %s, %s) value (?, ?, ?, ?)", Tour.DB_NAME, Tour.Columns.NAME, Tour.Columns.DESCRIPTION, Tour.Columns.AGENCY_ID, Tour.Columns.COST);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -34,6 +41,8 @@ public class TourDAO implements DAO<Tour, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
@@ -45,6 +54,7 @@ public class TourDAO implements DAO<Tour, Long> {
     @Override
     public List<Tour> findAll() {
         List<Tour> tours = new ArrayList<>();
+        Connection connection = connectionPool.getConnection();
         try {
             String query = String.format(DAOUtils.FIND_ALL_QUERY, Tour.DB_NAME);
             PreparedStatement statement = connection.prepareStatement(query);
@@ -57,6 +67,8 @@ public class TourDAO implements DAO<Tour, Long> {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
+        } finally {
+            connectionPool.releaseConnection(connection);
         }
     }
 
