@@ -10,37 +10,37 @@
     </welcome-file-list>
 
     <servlet>
-        <servlet-name>agencyServlet</servlet-name>
-        <servlet-class>com.alex.laba.web.AgencyServlet</servlet-class>
+        <servlet-name>groupServlet</servlet-name>
+        <servlet-class>com.julia.laba.web.GroupServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>agencyServlet</servlet-name>
-        <url-pattern>/agency</url-pattern>
+        <servlet-name>groupServlet</servlet-name>
+        <url-pattern>/group</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>agentServlet</servlet-name>
-        <servlet-class>com.alex.laba.web.AgentServlet</servlet-class>
+        <servlet-name>studentServlet</servlet-name>
+        <servlet-class>com.julia.laba.web.StudentServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>agentServlet</servlet-name>
-        <url-pattern>/agent</url-pattern>
+        <servlet-name>studentServlet</servlet-name>
+        <url-pattern>/student</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>orderServlet</servlet-name>
-        <servlet-class>com.alex.laba.web.OrderServlet</servlet-class>
+        <servlet-name>testServlet</servlet-name>
+        <servlet-class>com.julia.laba.web.TestServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>orderServlet</servlet-name>
-        <url-pattern>/order</url-pattern>
+        <servlet-name>testServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
     </servlet-mapping>
 
     <servlet>
         <servlet-name>userServlet</servlet-name>
-        <servlet-class>com.alex.laba.web.UserServlet</servlet-class>
+        <servlet-class>com.julia.laba.web.UserServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -49,17 +49,17 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>tourServlet</servlet-name>
-        <servlet-class>com.alex.laba.web.TourServlet</servlet-class>
+        <servlet-name>subjectServlet</servlet-name>
+        <servlet-class>com.julia.laba.web.SubjectServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>tourServlet</servlet-name>
-        <url-pattern>/tour</url-pattern>
+        <servlet-name>subjectServlet</servlet-name>
+        <url-pattern>/subject</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>loginServlet</servlet-name>
-        <servlet-class>com.alex.laba.web.LoginServlet</servlet-class>
+        <servlet-class>com.julia.laba.web.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>loginServlet</servlet-name>

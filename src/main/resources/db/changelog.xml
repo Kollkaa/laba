@@ -5,11 +5,11 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="scripts/user.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/tour-agencies.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/tour-agents.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/tour.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/tour-orders.sql" relativeToChangelogFile="true"/>
-    <include file="scripts/agent_order.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/subject-agencies.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/subject-agents.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/subject.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/subject-orders.sql" relativeToChangelogFile="true"/>
+    <include file="scripts/student_test.sql" relativeToChangelogFile="true"/>
     <include file="scripts/user_password.sql" relativeToChangelogFile="true"/>
     <include file="scripts/unique_username.sql" relativeToChangelogFile="true"/>
 

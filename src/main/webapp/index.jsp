@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: andrii
-  Date: 2/26/19
-  Time: 19:04
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
@@ -31,10 +24,10 @@
 <body>
 <div class="pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
-        <li class="pure-menu-item"><a href="/agency">Agencies</a></li>
-        <li class="pure-menu-item"><a href="/agent">Agents</a></li>
-        <li class="pure-menu-item"><a href="/order">Orders</a></li>
-        <li class="pure-menu-item"><a href="/tour">Tours</a></li>
+        <li class="pure-menu-item"><a href="/group">Groups</a></li>
+        <li class="pure-menu-item"><a href="/student">Students</a></li>
+        <li class="pure-menu-item"><a href="/test">Tests</a></li>
+        <li class="pure-menu-item"><a href="/subject">Subjects</a></li>
     </ul>
 </div>
 <h2>Welcome ${cookie.get("username").value}</h2>

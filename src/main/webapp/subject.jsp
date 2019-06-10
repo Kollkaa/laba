@@ -12,28 +12,41 @@
 
 <div class="pure-u-3-5">
     <table class="pure-table pure-table-bordered pure-u-3-5">
-        <%System.out.println("users jsp");%>
         <thead>
         <tr>
             <td>ID</td>
-            <td>User Name</td>
-
+            <td>Subject Name</td>
+            <td>Subject description</td>
+            <td>Subject group id</td>
+            <td>Subject credits</td>
         </tr>
         </thead>
         <tbody class="pure-table-odd">
-        <c:forEach var="user" items="${users}">
+        <c:forEach var="subject" items="${subjects}">
             <tr style="border: black">
-                <td>${user.getId()}</td>
-                <td>${user.getUserName()}</td>
+                <td>${subject.getId()}</td>
+                <td>${subject.getName()}</td>
+                <td>${subject.getDescription()}</td>
+                <td>${subject.getGroup()}</td>
+                <td>${subject.getCredits()}</td>
+
             </tr>
         </c:forEach>
         </tbody>
     </table>
 </div>
 <div class="pure-u-2-5">
-    <form class="pure-form pure-form-stacked pure-u-2-5" action="<c:url value="/user"/>" method="POST">
-        User name <label>
-        <input type="text" name="user_name">
+    <form class="pure-form pure-form-stacked pure-u-2-5" action="<c:url value="/subject"/>" method="POST">
+        Subject name <label>
+        <input type="text" name="subject_name">
+    </label>
+        Subject description <label>
+        <input type="text" name="subject_description">
+    </label>
+        Subject group id <label>
+        <input type="text" name="subject_group">
+    </label> Subject credits <label>
+        <input type="text" name="subject_credits">
     </label>
         <input type="submit" value="Submit"/>
     </form>

@@ -1,7 +1,0 @@
-create table orders(
-id INTEGER PRIMARY KEY AUTO_INCREMENT,
-user_id INTEGER NOT NULL,
-tour_id INTEGER NOT NULL,
-agent_id INTEGER NOT NULL,
-cost INTEGER
-)
